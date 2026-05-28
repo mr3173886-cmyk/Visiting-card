@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Mr. King</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: #00ff41; /* Hacking green color */
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Matrix Hacking Background */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #00ff41;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        video {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+            border: 1px solid #00ff41;
+        }
+
+        h2 { 
+            color: #00ff41; 
+            margin-bottom: 10px; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .details { 
+            text-align: left; 
+            line-height: 1.6; 
+            background: rgba(0, 255, 65, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #000;
+            background: #00ff41;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            box-shadow: 0 0 15px #00ff41;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-bg"></canvas>
+
+    <div class="container">
+        <!-- Your Specific Video -->
+        <video controls autoplay muted loop>
+            <source src="https://files.catbox.moe/14ind4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <h2>> SYSTEM INFO</h2>
+        <div class="details">
+            <p><strong>NAME:</strong> R O NI</p>
+            <p><strong>ROLE:</strong> Technology Learner</p>
+            <p><strong>PASSION:</strong> Love to make or build things.</p>
+            <p><strong>MOTTO:</strong> Love to learn things ☠️</p>
+        </div>
+
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> RETURN</a>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#00ff41";
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        setInterval(drawMatrix, 30);
+    </script>
+</body>
+</html>
+
