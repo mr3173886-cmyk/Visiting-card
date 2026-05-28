@@ -34,7 +34,7 @@
             transition: background 0.3s ease;
         }
 
-        /* Neon Cursor Light */
+    
         #cursor-light {
             position: fixed;
             width: 150px;
@@ -155,10 +155,10 @@
         </div>
 
         <h1>Mr. King <i class="fas fa-check-circle" style="color:#1d9bf0"></i></h1>
-        <p class="tagline">~ MY STORY IN A FRAME ~</p>
-        <div style="margin-bottom: 15px;">🎀🦋</div>
+        <p class="tagline">~ Nothing is impossible~</p>
+        <div style="margin-bottom: 15px;">🕊️🦚</div>
 
-        <!-- আপনার সোশ্যাল লিঙ্কগুলো এখানে ফিরে এসেছে -->
+        
         <div class="social-links">
             <a href="https://www.facebook.com/T4N1NC9B4R" class="circle-icon fb"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/itz.me_roni1?igsh=ZGJ0ZTZiMngzbDRi" class="circle-icon insta"><i class="fab fa-instagram"></i></a>
@@ -166,12 +166,12 @@
 
         <div class="btn-group" id="dynamic-buttons">
             <a href="https://m.me/j/AbZ0oQNfk4O3xqds/?send_source=gc%3Acopy_invite_link_c" class="link-btn">JOIN OUR MESSENGER GC</a>
-            <!-- এখানে অটোমেটিক নতুন ফাইলগুলো অ্যাড হবে -->
+            
         </div>
     </div>
 
     <script>
-        // Neon Light Effect
+        
         const cursor = document.getElementById('cursor-light');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
@@ -180,7 +180,7 @@
             cursor.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]} 0%, transparent 70%)`;
         });
 
-        // Snowflakes
+        
         const canvas = document.getElementById('snow');
         const ctx = canvas.getContext('2d');
         let width, height, flakes = [];
@@ -204,7 +204,7 @@
         }
         init(); draw();
 
-        // Theme Toggle
+        
         const toggleBtn = document.getElementById('theme-toggle');
         toggleBtn.addEventListener('click', () => {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -212,7 +212,7 @@
             toggleBtn.querySelector('i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
         });
 
-        // Dynamic File Loader
+        
         async function loadButtons() {
             try {
                 const res = await fetch('/api/files');
