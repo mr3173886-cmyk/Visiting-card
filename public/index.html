@@ -32,10 +32,9 @@
             font-family: 'Segoe UI', sans-serif;
             overflow: hidden;
             transition: background 0.3s ease;
-            cursor: crosshair;
         }
 
-        
+        /* Neon Cursor Light */
         #cursor-light {
             position: fixed;
             width: 150px;
@@ -68,35 +67,6 @@
             z-index: 10;
         }
 
-        .profile-img img {
-            width: 110px; height: 110px;
-            border-radius: 50%;
-            border: 4px solid white;
-            object-fit: cover;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .link-btn {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: bold;
-            font-size: 13px;
-            border: 1px solid rgba(148, 163, 184, 0.5);
-            padding: 12px 0;
-            background: var(--btn-bg);
-            width: 90%;
-            border-radius: 12px;
-            transition: 0.3s;
-            text-align: center;
-        }
-
         .header-icons {
             display: flex;
             justify-content: space-between;
@@ -113,6 +83,59 @@
             width: 35px; height: 35px;
             color: var(--icon-color);
             cursor: pointer;
+        }
+
+        .profile-img img {
+            width: 110px; height: 110px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+        }
+
+        h1 { font-size: 22px; color: var(--text-color); margin: 15px 0 5px; }
+        .tagline { font-size: 12px; color: #94a3b8; }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .circle-icon {
+            width: 48px; height: 48px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 22px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .fb { color: #1877f2; }
+        .insta { color: #e4405f; }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .link-btn {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 13px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            padding: 12px 0;
+            background: var(--btn-bg);
+            width: 90%;
+            border-radius: 12px;
+            transition: 0.3s;
+            text-align: center;
         }
     </style>
 </head>
@@ -132,16 +155,23 @@
         </div>
 
         <h1>Mr. King <i class="fas fa-check-circle" style="color:#1d9bf0"></i></h1>
-        <p style="font-size:12px; color:#94a3b8">~ MY STORY IN A FRAME ~</p>
+        <p class="tagline">~ MY STORY IN A FRAME ~</p>
+        <div style="margin-bottom: 15px;">🎀🦋</div>
+
+        <!-- আপনার সোশ্যাল লিঙ্কগুলো এখানে ফিরে এসেছে -->
+        <div class="social-links">
+            <a href="https://www.facebook.com/T4N1NC9B4R" class="circle-icon fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/itz.me_roni1?igsh=ZGJ0ZTZiMngzbDRi" class="circle-icon insta"><i class="fab fa-instagram"></i></a>
+        </div>
 
         <div class="btn-group" id="dynamic-buttons">
             <a href="https://m.me/j/AbZ0oQNfk4O3xqds/?send_source=gc%3Acopy_invite_link_c" class="link-btn">JOIN OUR MESSENGER GC</a>
-            <!-- Files like mr.king.html will appear here -->
+            <!-- এখানে অটোমেটিক নতুন ফাইলগুলো অ্যাড হবে -->
         </div>
     </div>
 
     <script>
-        // Neon Mouse Follow
+        // Neon Light Effect
         const cursor = document.getElementById('cursor-light');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
@@ -150,7 +180,7 @@
             cursor.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]} 0%, transparent 70%)`;
         });
 
-        // Snow Animation
+        // Snowflakes
         const canvas = document.getElementById('snow');
         const ctx = canvas.getContext('2d');
         let width, height, flakes = [];
@@ -182,21 +212,22 @@
             toggleBtn.querySelector('i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
         });
 
-        // Load Dynamic Buttons
+        // Dynamic File Loader
         async function loadButtons() {
-            const res = await fetch('/api/files');
-            const files = await res.json();
-            const container = document.getElementById('dynamic-buttons');
-            files.forEach(file => {
-                const a = document.createElement('a');
-                a.href = file;
-                a.className = 'link-btn';
-                a.innerText = file.replace('.html', '').toUpperCase();
-                container.appendChild(a);
-            });
+            try {
+                const res = await fetch('/api/files');
+                const files = await res.json();
+                const container = document.getElementById('dynamic-buttons');
+                files.forEach(file => {
+                    const a = document.createElement('a');
+                    a.href = file;
+                    a.className = 'link-btn';
+                    a.innerText = file.replace('.html', '').toUpperCase();
+                    container.appendChild(a);
+                });
+            } catch(e) { console.log("Files load error"); }
         }
         loadButtons();
     </script>
 </body>
-  </html>
-  
+</html>
