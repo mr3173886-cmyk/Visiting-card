@@ -1,0 +1,11 @@
+{
+  "name": "personal-visiting-card",
+  "version": "1.0.0",
+  "description": "My personal glassmorphism visiting card website",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": { "express": "^4.19.2"
+  }
+}
