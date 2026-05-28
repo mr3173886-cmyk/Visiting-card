@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. King | Official</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #e9f1fa;
+            --card-bg: rgba(255, 255, 255, 0.4);
+            --text-color: #334155;
+            --btn-bg: rgba(255, 255, 255, 0.5);
+            --icon-color: #444;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-color: #f1f5f9;
+            --btn-bg: rgba(51, 65, 85, 0.5);
+            --icon-color: #f1f5f9;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-color);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            transition: background 0.3s ease;
+            cursor: crosshair;
+        }
+
+        
+        #cursor-light {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,0,255,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+        }
+
+        #snow {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px 20px;
+            width: 320px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        .profile-img img {
+            width: 110px; height: 110px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .link-btn {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 13px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            padding: 12px 0;
+            background: var(--btn-bg);
+            width: 90%;
+            border-radius: 12px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .header-icons {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            width: 88%;
+            top: 15px;
+            left: 6%;
+        }
+
+        .icon-btn {
+            background: var(--btn-bg);
+            border: none;
+            border-radius: 50%;
+            width: 35px; height: 35px;
+            color: var(--icon-color);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-light"></div>
+    <canvas id="snow"></canvas>
+
+    <div class="card">
+        <div class="header-icons">
+            <button class="icon-btn"><i class="fas fa-arrow-left"></i></button>
+            <button class="icon-btn" id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+
+        <div class="profile-img">
+            <img src="https://files.catbox.moe/ixj7u8.jpg" alt="Profile">
+        </div>
+
+        <h1>Mr. King <i class="fas fa-check-circle" style="color:#1d9bf0"></i></h1>
+        <p style="font-size:12px; color:#94a3b8">~ MY STORY IN A FRAME ~</p>
+
+        <div class="btn-group" id="dynamic-buttons">
+            <a href="https://m.me/j/AbZ0oQNfk4O3xqds/?send_source=gc%3Acopy_invite_link_c" class="link-btn">JOIN OUR MESSENGER GC</a>
+            <!-- Files like mr.king.html will appear here -->
+        </div>
+    </div>
+
+    <script>
+        // Neon Mouse Follow
+        const cursor = document.getElementById('cursor-light');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            const colors = ['rgba(255,0,255,0.4)', 'rgba(0,255,255,0.4)', 'rgba(0,255,0,0.4)'];
+            cursor.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]} 0%, transparent 70%)`;
+        });
+
+        // Snow Animation
+        const canvas = document.getElementById('snow');
+        const ctx = canvas.getContext('2d');
+        let width, height, flakes = [];
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            flakes = [];
+            for (let i = 0; i < 50; i++) {
+                flakes.push({ x: Math.random()*width, y: Math.random()*height, speed: Math.random()*2+1 });
+            }
+        }
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.font = '20px serif';
+            flakes.forEach(f => {
+                ctx.fillText('❄️', f.x, f.y);
+                f.y += f.speed;
+                if (f.y > height) f.y = -20;
+            });
+            requestAnimationFrame(draw);
+        }
+        init(); draw();
+
+        // Theme Toggle
+        const toggleBtn = document.getElementById('theme-toggle');
+        toggleBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            toggleBtn.querySelector('i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+        });
+
+        // Load Dynamic Buttons
+        async function loadButtons() {
+            const res = await fetch('/api/files');
+            const files = await res.json();
+            const container = document.getElementById('dynamic-buttons');
+            files.forEach(file => {
+                const a = document.createElement('a');
+                a.href = file;
+                a.className = 'link-btn';
+                a.innerText = file.replace('.html', '').toUpperCase();
+                container.appendChild(a);
+            });
+        }
+        loadButtons();
+    </script>
+</body>
+  </html>
+  
