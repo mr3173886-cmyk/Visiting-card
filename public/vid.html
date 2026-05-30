@@ -94,7 +94,7 @@
 </div>
 
 <script>
-    // আপনার রেন্ডার ব্যাকএন্ড ইউআরএল এখানে বসাবেন
+    // আপনার রেন্ডার ব্যাকএন্ড ইউআরএল
     const API_BASE = "https://visiting-card-f60f.onrender.com/api/videos";
 
     // সার্ভার থেকে সমস্ত লিংক লোড করার ফাংশন
@@ -110,9 +110,10 @@
 
             data.forEach((item, index) => {
                 const li = document.createElement("li");
+                // এখানে item._id এর বদলে নতুন local file এর item.id সেট করা হয়েছে ডিলিটের জন্য
                 li.innerHTML = `
                     <span class="link-text">${index + 1}. ${item.link}</span>
-                    <button class="btn-delete" onclick="deleteLink('${item._id}')">Delete</button>
+                    <button class="btn-delete" onclick="deleteLink('${item.id}')">Delete</button>
                 `;
                 listEl.appendChild(li);
             });
