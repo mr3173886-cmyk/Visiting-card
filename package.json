@@ -1,5 +1,14 @@
-"dependencies": {
-  "express": "^4.19.2",
-  "mongoose": "^8.3.4",
-  "cors": "^2.8.5"
+{
+  "name": "visiting-card-backend",
+  "version": "1.0.0",
+  "description": "Video Link Manager with MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.3.4",
+    "cors": "^2.8.5"
+  }
 }
