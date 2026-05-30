@@ -1,11 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
+const cors = require('cors');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-// এক্সপ্রেস বডি পার্সার এবং স্ট্যাটিক ফোল্ডার সেটআপ
+// মিডলওয়্যার সেটআপ
+app.use(cors());
 app.use(express.json());
+
+// এক্সপ্রেসকে বলে দেওয়া যে public ফোল্ডারে আমাদের HTML ফাইল আছে
 app.use(express.static('public'));
 
 // ================= [ MONGODB CONNECTION ] =================
@@ -56,6 +60,11 @@ app.delete('/api/videos/:id', async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
+});
+
+// root রাউটে ইনডেক্স মেসেজ
+app.get('/', (req, res) => {
+    res.send("Server is running perfectly! Go to /vid.html to manage videos.");
 });
 
 // ================= [ SERVER PORT LISTENER ] =================
