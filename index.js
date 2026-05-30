@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // ================= [ MONGODB CONNECTION ] =================
-const mongoURI = "mongodb+srv://mr3173886_db_user:Monikaamydarling12@cluster0.ozx9rai.mongodb.net/?appName=Cluster0";
+const mongoURI = "mongodb+srv://mr3173886_db_user:Monikaamydarling12@cluster0.ozx9rai.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(mongoURI)
     .then(() => console.log("🔥 MongoDB Connected Successfully!"))
